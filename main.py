@@ -34,7 +34,7 @@ def main():
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
 
-    my_player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    my_player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0)
     field = AsteroidField()
 
     while True:
@@ -53,6 +53,8 @@ def main():
         screen.fill("black")
         for d in drawable:
             d.draw(screen)
+        if my_player.cooldown > 0:
+            my_player.cooldown -= dt
         pygame.display.flip()
         
         dt = clock.tick(60) /1000
