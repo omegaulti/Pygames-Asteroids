@@ -5,6 +5,8 @@ from player import *
 from circleshape import *
 from asteroid import *
 from asteroidfield import *
+from logger import log_event
+import sys
 
 
 
@@ -40,6 +42,11 @@ def main():
         
         updatable.update(dt)
 
+        for a in asteroids:
+            if a.collides_with(my_player) == True:
+                log_event("player_hit")
+                print("Game_over!")
+                sys.exit()
         screen.fill("black")
         for d in drawable:
             d.draw(screen)
